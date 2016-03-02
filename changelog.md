@@ -1,5 +1,10 @@
 
 # @redisrupt/svg-morpheus - Changelog
+## v1.0.2
+- **Bug Fixes**
+  - proper name for the generated file - [9aa6119]( https://github.com/Redisrupt/SVG-Morpheus/commit/9aa6119 ), [Roy Riojas](https://github.com/Roy Riojas), 02/03/2016 15:32:32
+
+    
 ## v1.0.1
 - **Refactoring**
   - Add scope to package name - [2dcfc2d]( https://github.com/Redisrupt/SVG-Morpheus/commit/2dcfc2d ), [Roy Riojas](https://github.com/Roy Riojas), 02/03/2016 15:11:47
