@@ -1,5 +1,10 @@
 
-# svg-morpheus - Changelog
+# @redisrupt/svg-morpheus - Changelog
+## v1.0.1
+- **Refactoring**
+  - Add scope to package name - [2dcfc2d]( https://github.com/Redisrupt/SVG-Morpheus/commit/2dcfc2d ), [Roy Riojas](https://github.com/Roy Riojas), 02/03/2016 15:11:47
+
+    
 ## v1.0.0
 - **Refactoring**
   - Make the repo npm friendly - [6badd33]( https://github.com/Redisrupt/SVG-Morpheus/commit/6badd33 ), [Roy Riojas](https://github.com/Roy Riojas), 02/03/2016 14:57:29
