@@ -34,12 +34,12 @@ var Config = {
       js:     'source/js'
     },
     compileUnminified: {
-      root:   'compile/unminified',
-      js:     'compile/unminified'
+      root:   'compile',
+      js:     'compile'
     },
     compileMinified: {
-      root:   'compile/minified',
-      js:     'compile/minified'
+      root:   'compile',
+      js:     'compile'
     }
   },
   banners: {
@@ -51,8 +51,9 @@ var Config = {
                 ' * License: ' + pkg.license + '\n' +
                 ' *\n' +
                 ' * Generated at ' + gutil.date(today, 'dddd, mmmm dS, yyyy, h:MM:ss TT') + '\n' +
-                ' */',
-    minified: '/*! ' + pkg.prettyName + ' v' + pkg.version + ' License: ' + pkg.license + ' */'
+                ' * forked from https://github.com/alexk111/SVG-Morpheus\n'+
+                '*/',
+    minified: '/*! ' + pkg.prettyName + ' v' + pkg.version + ' License: ' + pkg.license + ' forked from https://github.com/alexk111/SVG-Morpheus */'
   }
 };
 
@@ -77,22 +78,23 @@ gulp.task('scripts', function(){
     }))
     .pipe(concat.header(Config.banners.unminified + '\n' +
                         'var SVGMorpheus=(function() {\n\'use strict\';\n\n'))
-    .pipe(concat.footer('\n}());'))
+    .pipe(concat.footer('\n}());\n\nif ( typeof module === "object" && module.exports ) {\n  module.exports = SVGMorpheus;\n}\n'))
     .pipe(gulp.dest(Config.paths.compileUnminified.js));
 });
 
 
 // Make a Distrib
 gulp.task('dist:js:clean', function(){
-  return gulp.src([Config.paths.compileMinified.root + '/**/*.js'], { read: false })
+  return gulp.src([Config.paths.compileMinified.root + '/**/*'], { read: false })
     .pipe(clean());
 });
-gulp.task('dist:js', ['dist:js:clean', 'scripts'], function(){
-  return gulp.src(Config.paths.compileUnminified.js + '/**/*.js')
-    .pipe(uglify())
-    .pipe(header(Config.banners.minified))
-    .pipe(gulp.dest(Config.paths.compileMinified.js));
-});
+
+// gulp.task('dist:js', ['dist:js:clean', 'scripts'], function(){
+//   return gulp.src(Config.paths.compileUnminified.js + '/svg-morpheus.js')
+//     .pipe(uglify())
+//     .pipe(header(Config.banners.minified))
+//     .pipe(gulp.dest(Config.paths.compileMinified.js));
+// });
 
 // Server
 gulp.task('server', function(){
@@ -137,7 +139,7 @@ gulp.task('lint', function() {
 });
 
 // Build
-gulp.task('build', ['dist:js']);
+gulp.task('build', ['dist:js:clean', 'scripts']);
 
 // Start server and watch for changes
 gulp.task('default', ['server', 'livereload', 'scripts', 'watch'], function(){

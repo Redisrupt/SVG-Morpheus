@@ -1,20 +1,37 @@
 {
   "author": {
-    "name": "Alex Kaul",
-    "email": "alexkaul@googlemail.com"
+    "name": "redisrupt",
+    "email": "roy+red@redisrupt.com"
   },
   "name": "svg-morpheus",
   "prettyName": "SVG Morpheus",
-  "version": "0.1.8",
-  "description": "JavaScript library enabling SVG icons to morph from one to the other. It implements Material Design's Delightful Details transitions.",
-  "homepage": "https://github.com/alexk111/SVG-Morpheus",
+  "version": "0.9.0",
+  "description": "JavaScript library enabling SVG icons to morph from one to the other. It implements Material Design's Delightful Details transitions. forked from https://github.com/alexk111/SVG-Morpheus",
+  "homepage": "https://github.com/Redisrupt/SVG-Morpheus",
   "repository": {
     "type": "git",
-    "url": "https://github.com/alexk111/SVG-Morpheus.git"
+    "url": "https://github.com/Redisrupt/SVG-Morpheus"
   },
+  "files": [
+    "compile/"
+  ],
+  "scripts": {
+    "build": "gulp build",
+    "demo": "gulp -o",
+    "changelog": "changelogx -f markdown -o ./changelog.md",
+    "do-changelog": "npm run changelog && git add ./changelog.md && git commit -m 'DOC: Generate changelog' --no-verify",
+    "install-hooks": "changelogx install-hook",
+    "pre-v": "npm run build",
+    "post-v": "npm run do-changelog && git push --no-verify && git push --tags --no-verify",
+    "bump-major": "npm run pre-v && npm version major -m 'BLD: Release v%s' && npm run post-v",
+    "bump-minor": "npm run pre-v && npm version minor -m 'BLD: Release v%s' && npm run post-v",
+    "bump-patch": "npm run pre-v && npm version patch -m 'BLD: Release v%s' && npm run post-v"
+  },
+  "main": "compile/svg-morpheus.js",
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
+    "changelogx": "^1.0.19",
     "connect-livereload": "^0.4.0",
     "express": "^4.4.5",
     "gulp": "^3.8.5",

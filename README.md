@@ -1,3 +1,13 @@
+#IMPORTANT
+
+Forked from https://github.com/Redisrupt/SVG-Morpheus
+
+This fork:
+- exports the module as a commonjs module
+- add the main field pointing to the compiled uncompressed resource
+- publish only the compiled resources
+- add a [changelog](./changelog.md)
+
 # SVG Morpheus
 
 JavaScript library enabling SVG icons to morph from one to the other. It implements Material Design's [Delightful Details](http://www.google.com/design/spec/animation/delightful-details.html) transitions.

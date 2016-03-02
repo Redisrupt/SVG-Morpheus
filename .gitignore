@@ -26,7 +26,8 @@ $RECYCLE.BIN/
 .LSOverride
 
 # Icon must ends with two \r.
-Icon
+Icon
+
 
 # Thumbnails
 ._*
@@ -42,3 +43,4 @@ node_modules/
 
 # GitHub pages
 gh-pages/
+compile/
