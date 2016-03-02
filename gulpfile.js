@@ -66,7 +66,7 @@ gulp.task('scripts', function(){
       Config.paths.source.js + '/deps/**/*.js',
       Config.paths.source.js + '/svg-morpheus.js'
     ])
-    .pipe(concat(pkg.name+'.js', {
+    .pipe(concat('svg-morpheus.js', {
       separator: '\n\n',
       process: function(src) {
         // Remove all 'use strict'; from the code and
