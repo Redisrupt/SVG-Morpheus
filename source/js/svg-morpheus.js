@@ -23,7 +23,7 @@ function SVGMorpheus(element, options, callback) {
 
   var that=this;
 
-  this._icons={};
+  this._icons= options.icons || {};
   this._curIconId=options.iconId || '';
   this._toIconId='';
   this._curIconItems=[];
@@ -213,15 +213,22 @@ SVGMorpheus.prototype._init=function(initialIconId){
     var lastIconId=initialIconId;
     var me = this;
 
-    this._icons = createIconCache(this._svgDoc, function (nodeIcon, id) {
-      if(!me._morphG) {
-        lastIconId=initialIconId || id;
-        me._morphG=document.createElementNS('http://www.w3.org/2000/svg', 'g');
-        me._svgDoc.replaceChild(me._morphG,nodeIcon);
-      } else {
-        me._svgDoc.removeChild(nodeIcon);
-      }
-    });
+    if (!this._icons) {
+      this._icons = createIconCache(this._svgDoc, function (nodeIcon, id) {
+        if(!me._morphG) {
+          lastIconId=initialIconId || id;
+          me._morphG=document.createElementNS('http://www.w3.org/2000/svg', 'g');
+          me._svgDoc.replaceChild(me._morphG,nodeIcon);
+        } else {
+          me._svgDoc.removeChild(nodeIcon);
+        }
+      });
+    }
+
+    if  (!me._morphG) {
+      me._morphG=document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      me._svgDoc.appendChild(me._morphG);
+    }
 
     // To Default Icon
     if(lastIconId!=='') {
