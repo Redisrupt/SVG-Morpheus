@@ -71,19 +71,16 @@ function SVGMorpheus(element, options, callback) {
   }
 }
 
-SVGMorpheus.prototype._init=function(initialIconId){
-  if(this._svgDoc.nodeName.toUpperCase()!=='SVG') {
-    this._svgDoc=this._svgDoc.getElementsByTagName('svg')[0];
-  }
+var createIconCache = SVGMorpheus.createIconCache = function (svg, onNodeIconFound) {
+  var _icons = [];
 
-  if(!!this._svgDoc) {
-    var lastIconId=initialIconId,
-        i, len, id, items, item, j, len2, icon;
+  if(!!svg) {
+    var i, len, id, items, item, j, len2, icon;
 
     // Read Icons Data
     // Icons = 1st tier G nodes having ID
-    for(i=this._svgDoc.childNodes.length-1;i>=0;i--) {
-      var nodeIcon=this._svgDoc.childNodes[i];
+    for(i=svg.childNodes.length-1;i>=0;i--) {
+      var nodeIcon=svg.childNodes[i];
       if(nodeIcon.nodeName.toUpperCase()==='G') {
         id=nodeIcon.getAttribute('id');
         if(!!id) {
@@ -195,20 +192,37 @@ SVGMorpheus.prototype._init=function(initialIconId){
               id: id,
               items: items
             };
-            this._icons[id]=icon;
+            _icons[id]=icon;
           }
 
-          // Init Node for Icons Items and remove Icon Nodes
-          if(!this._morphG) {
-            lastIconId=initialIconId || id;
-            this._morphG=document.createElementNS('http://www.w3.org/2000/svg', 'g');
-            this._svgDoc.replaceChild(this._morphG,nodeIcon);
-          } else {
-            this._svgDoc.removeChild(nodeIcon);
-          }
+          onNodeIconFound && onNodeIconFound(nodeIcon, id);
         }
       }
     }
+  }
+
+  return _icons;
+}
+
+SVGMorpheus.prototype._init=function(initialIconId){
+  if(this._svgDoc.nodeName.toUpperCase()!=='SVG') {
+    this._svgDoc=this._svgDoc.getElementsByTagName('svg')[0];
+  }
+
+  if(!!this._svgDoc) {
+    var lastIconId=initialIconId;
+    var me = this;
+
+    this._icons = createIconCache(this._svgDoc, function (nodeIcon, id) {
+      if(!me._morphG) {
+        lastIconId=initialIconId || id;
+        me._morphG=document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        me._svgDoc.replaceChild(me._morphG,nodeIcon);
+      } else {
+        me._svgDoc.removeChild(nodeIcon);
+      }
+    });
+
     // To Default Icon
     if(lastIconId!=='') {
       this._setupAnimation(lastIconId);
