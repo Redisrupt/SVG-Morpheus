@@ -1,5 +1,17 @@
 
 # @redisrupt/svg-morpheus - Changelog
+## v1.0.3
+- **Refactoring**
+  - receive the iconsCache from external code, to avoid wasting resources recreating the icons cache on every instance - [da20d5f]( https://github.com/Redisrupt/SVG-Morpheus/commit/da20d5f ), [Roy Riojas](https://github.com/Roy Riojas), 10/03/2016 03:51:12
+
+    
+- **Bug Fixes**
+  - extract `createIconCache` as a separated method - [7420589]( https://github.com/Redisrupt/SVG-Morpheus/commit/7420589 ), [Roy Riojas](https://github.com/Roy Riojas), 10/03/2016 03:33:01
+
+    
+  - choose the right icon from the beginning - [1e96c3b]( https://github.com/Redisrupt/SVG-Morpheus/commit/1e96c3b ), [Roy Riojas](https://github.com/Roy Riojas), 10/03/2016 02:35:57
+
+    
 ## v1.0.2
 - **Bug Fixes**
   - proper name for the generated file - [9aa6119]( https://github.com/Redisrupt/SVG-Morpheus/commit/9aa6119 ), [Roy Riojas](https://github.com/Roy Riojas), 02/03/2016 15:32:32
