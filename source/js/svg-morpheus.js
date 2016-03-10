@@ -64,20 +64,20 @@ function SVGMorpheus(element, options, callback) {
   if(!this._svgDoc) {
     element.addEventListener("load",function(){
       that._svgDoc = element.getSVGDocument();
-      that._init();
+      that._init(this._curIconId);
     },false);
   } else {
-    that._init();
+    that._init(this._curIconId);
   }
 }
 
-SVGMorpheus.prototype._init=function(){
+SVGMorpheus.prototype._init=function(initialIconId){
   if(this._svgDoc.nodeName.toUpperCase()!=='SVG') {
     this._svgDoc=this._svgDoc.getElementsByTagName('svg')[0];
   }
 
   if(!!this._svgDoc) {
-    var lastIconId='',
+    var lastIconId=initialIconId,
         i, len, id, items, item, j, len2, icon;
 
     // Read Icons Data
@@ -200,7 +200,7 @@ SVGMorpheus.prototype._init=function(){
 
           // Init Node for Icons Items and remove Icon Nodes
           if(!this._morphG) {
-            lastIconId=id;
+            lastIconId=initialIconId || id;
             this._morphG=document.createElementNS('http://www.w3.org/2000/svg', 'g');
             this._svgDoc.replaceChild(this._morphG,nodeIcon);
           } else {
