@@ -63,7 +63,10 @@ var Config = {
 // Compile Scripts
 gulp.task('scripts', function(){
   return gulp.src([
-      Config.paths.source.js + '/deps/**/*.js',
+      Config.paths.source.js + '/deps/raf.js',
+      Config.paths.source.js + '/deps/easings.js',
+      Config.paths.source.js + '/deps/helpers.js',
+      Config.paths.source.js + '/deps/snapsvglite.js',
       Config.paths.source.js + '/svg-morpheus.js'
     ])
     .pipe(concat('svg-morpheus.js', {

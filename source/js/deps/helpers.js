@@ -4,8 +4,8 @@
 
 'use strict';
 
-var _reqAnimFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.oRequestAnimationFrame;
-var _cancelAnimFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame || window.webkitCancelAnimationFrame || window.oCancelAnimationFrame;
+var _reqAnimFrame = window.requestAnimationFrame;
+var _cancelAnimFrame = window.cancelAnimationFrame;
 
 
 // Calculate style
